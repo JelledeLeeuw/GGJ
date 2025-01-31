@@ -31,7 +31,8 @@ public class InputHandler : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        playerControls = new Controls();
+        playerControls.Enable();
         moveAction = playerControls.Player.Move;
         RegisterInputActions();
     }
