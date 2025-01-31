@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.Media;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
