@@ -42,7 +42,7 @@ public class PlayerMovement : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!IsOwner)
             return;
