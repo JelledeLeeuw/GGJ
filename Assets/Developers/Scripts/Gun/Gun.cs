@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private GameObject bullet;
+    [SerializeField]
+    private GameObject bullet;
     private InputHandler _inputHandler;
     private bool _inputTriggerd;
     private bool _cooldownActive;
