@@ -915,11 +915,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 2560b320-5339-4155-8e64-01e8af9f479c
+  cloudProjectId: eb03dbfc-cc41-4e88-a70b-0d8159f31d5a
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: GGJ25
-  organizationId: jelleglu
+  organizationId: nqrdi
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
