@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float walkSpeed;
     [SerializeField] private float sprintMultiplier;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private float maxVelocity;
 
     private Vector3 currentMovement;
 
@@ -13,12 +14,15 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController characterController;
 
+    private Rigidbody rb;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
 
         characterController = gameObject.GetComponent<CharacterController>();
         inputHandler = FindFirstObjectByType<InputHandler>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -48,9 +52,16 @@ public class PlayerMovement : MonoBehaviour
         currentMovement.x = worldDirection.x * walkSpeed;
         currentMovement.z = worldDirection.z * walkSpeed;
 
-        characterController.Move(currentMovement * Time.deltaTime);
+        rb.AddForce(currentMovement * Time.deltaTime, ForceMode.Impulse);
+        Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        if (horizontalVelocity.magnitude > maxVelocity)
+        {
+            Vector3 clampedVelocity = horizontalVelocity.normalized * maxVelocity;
+            rb.linearVelocity = new Vector3(clampedVelocity.x, rb.linearVelocity.y, clampedVelocity.z);
+        }
 
-        currentMovement += Physics.gravity;
+
+        //currentMovement += Physics.gravity;
 
         HandleRotation(worldDirection, cameraForward);
     }

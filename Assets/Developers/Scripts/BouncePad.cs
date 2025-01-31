@@ -13,7 +13,7 @@ namespace Developers.Scripts
         private float Delay; // delays reactivation.
 
         [SerializeField]
-        private ForceMode _forceMode;
+        private ForceMode forceMode;
 
         private bool _delayActive;
 
@@ -25,7 +25,7 @@ namespace Developers.Scripts
                 if (_delayActive)
                     return;
                 print("yus");
-                other.attachedRigidbody.AddForce(Vector3.up * bounceForce, _forceMode);
+                other.attachedRigidbody.AddForce(Vector3.up * bounceForce, forceMode);
                 StartCoroutine(DelayEnum());    
             }
         }
