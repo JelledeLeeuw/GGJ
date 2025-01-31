@@ -22,17 +22,20 @@ namespace Developers.Scripts
             print("trigger");
             if (other.gameObject.CompareTag("Player"))
             {
+                if (_delayActive)
+                    return;
                 print("yus");
                 other.attachedRigidbody.AddForce(Vector3.up * bounceForce, _forceMode);
+                StartCoroutine(DelayEnum());    
             }
         }
 
 
-        // private IEnumerator OnCollisionExit(Collision other)
-        // {
-        //     _delayActive = true;
-        //     yield return new WaitForSeconds(Delay);
-        //     
-        // }
+        private IEnumerator DelayEnum()
+        {
+            _delayActive = true;
+            yield return new WaitForSeconds(Delay);
+            _delayActive = false;
+        }
     }
 }
