@@ -9,14 +9,12 @@ public class InputHandler : MonoBehaviour
     private InputAction moveAction;
     //private InputAction jumpAction;
     private InputAction sprintAction;
-    private InputAction attackAction;
+    private InputAction shootAction;
     public Vector2 moveInput { get; private set; }
-
-    public float sprintValue { get; private set; }
 
     public bool jumpTriggered { get; private set; }
 
-    public bool attackTriggered { get; private set; }
+    public bool shootTriggered { get; private set; }
 
     public static InputHandler Instance { get; private set; }
 
@@ -34,6 +32,7 @@ public class InputHandler : MonoBehaviour
         playerControls = new Controls();
         playerControls.Enable();
         moveAction = playerControls.Player.Move;
+        shootAction = playerControls.Player.Shoot;
         RegisterInputActions();
     }
 
@@ -41,15 +40,19 @@ public class InputHandler : MonoBehaviour
     {
         moveAction.performed += context => moveInput = context.ReadValue<Vector2>();
         moveAction.canceled += context => moveInput = Vector2.zero;
+        shootAction.performed += context => shootTriggered = true;
+        shootAction.canceled += context => shootTriggered = false;
     }
 
     private void OnEnable()
     {
         moveAction.Enable();
+        shootAction.Enable();
     }
 
     private void OnDisable()
     {
         moveAction.Disable();
+        shootAction.Disable();
     }
 }
