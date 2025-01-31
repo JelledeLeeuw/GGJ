@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
         characterController = gameObject.GetComponent<CharacterController>();
         inputHandler = FindObjectOfType<InputHandler>();
+        characterController.enabled = false;
     }
 
     private void Update()
