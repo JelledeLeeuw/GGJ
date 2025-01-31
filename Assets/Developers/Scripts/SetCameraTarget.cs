@@ -3,23 +3,22 @@ using UnityEngine;
 
 public class SetCameraTarget : MonoBehaviour
 {
-    [SerializeField] private CinemachineCamera cam;
-    private Transform player;
+    [SerializeField]
+    private CinemachineCamera cam;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    void Start() { }
 
     // Update is called once per frame
-    void Update()
-    {
-        player = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        Debug.Log(player);
-        AssignTarget();
-    }
+    // void Update()
+    // {
+    //
+    //     player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+    //     Debug.Log(player);
+    //     AssignTarget();
+    // }
 
-    private void AssignTarget()
+    public void AssignTarget(Transform player)
     {
         cam.Target.LookAtTarget = player;
         cam.Target.TrackingTarget = player;

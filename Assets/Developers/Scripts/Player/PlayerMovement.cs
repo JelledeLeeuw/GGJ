@@ -1,13 +1,21 @@
-using UnityEngine;
 using Unity.Netcode;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class PlayerMovement : NetworkBehaviour
 {
     [Header("Movement variables")]
-    [SerializeField] private float walkSpeed;
-    [SerializeField] private float sprintMultiplier;
-    [SerializeField] private float rotationSpeed;
-    [SerializeField] private float maxVelocity;
+    [SerializeField]
+    private float walkSpeed;
+
+    [SerializeField]
+    private float sprintMultiplier;
+
+    [SerializeField]
+    private float rotationSpeed;
+
+    [SerializeField]
+    private float maxVelocity;
 
     private Vector3 currentMovement;
 
@@ -19,21 +27,24 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-
-        characterController = gameObject.GetComponent<CharacterController>();
+        // characterController = gameObject.GetComponent<CharacterController>();
         inputHandler = FindFirstObjectByType<InputHandler>();
+        Camera.main.GetComponent<SetCameraTarget>().AssignTarget(transform);
         rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
+        print($"is owner: {IsOwner}");
+        if (!IsOwner)
+            return;
         HandleMovement();
     }
 
     private void HandleMovement()
     {
         // Movement input from player
+        print(inputHandler.moveInput.x);
         Vector3 movementInput = new Vector3(inputHandler.moveInput.x, 0, inputHandler.moveInput.y);
         movementInput.Normalize();
 
@@ -58,9 +69,12 @@ public class PlayerMovement : NetworkBehaviour
         if (horizontalVelocity.magnitude > maxVelocity)
         {
             Vector3 clampedVelocity = horizontalVelocity.normalized * maxVelocity;
-            rb.linearVelocity = new Vector3(clampedVelocity.x, rb.linearVelocity.y, clampedVelocity.z);
+            rb.linearVelocity = new Vector3(
+                clampedVelocity.x,
+                rb.linearVelocity.y,
+                clampedVelocity.z
+            );
         }
-
 
         //currentMovement += Physics.gravity;
 
@@ -71,9 +85,14 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (worldDirection.magnitude > 0.01f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(/*inputHandler.aimTriggered ? cameraForward :*/ worldDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            Quaternion targetRotation = Quaternion.LookRotation( /*inputHandler.aimTriggered ? cameraForward :*/
+                worldDirection
+            );
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
         }
     }
 }
-
