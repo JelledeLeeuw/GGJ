@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         characterController = gameObject.GetComponent<CharacterController>();
-        inputHandler = FindObjectOfType<InputHandler>();
+        inputHandler = FindFirstObjectByType<InputHandler>();
     }
 
     private void Update()
