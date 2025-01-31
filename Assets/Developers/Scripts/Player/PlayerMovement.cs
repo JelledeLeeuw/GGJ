@@ -33,7 +33,7 @@ public class PlayerMovement : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         print($"is owner: {IsOwner}");
         if (!IsOwner)
