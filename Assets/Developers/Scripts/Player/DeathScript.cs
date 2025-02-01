@@ -1,62 +1,85 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class DeathScript : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
-    private bool isDead = false;
+    private Rigidbody rb;
 
-    public GameObject player;
-    public Transform respawnPoint;
+    [SerializeField]
+    private GameObject checkpointsParent;
 
+    public GameObject[] checkpointsArray;
 
-    public bool respawnCoins;
-    void Start()
+    private Vector3 startingPoint;
+
+    private const string save_Checkpoint_Index = "Last_Checkpoint_Index";
+
+    private void Awake()
     {
-        // Get the SpriteRenderer component
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        //player = GetComponent<GameObject>();
+        LoadCheckpoints();
     }
 
-    // Coroutine to handle the fade-out effect
-    IEnumerator FadeOut()
+    private void Start()
     {
-        float fadeDuration = 0.5f; // How long the fade lasts
-        float timeElapsed = 0f;
+        rb = GetComponent<Rigidbody>();
 
-        Color initialColor = spriteRenderer.color;
+        int savedCheckpointIndex = -1;
+        savedCheckpointIndex = PlayerPrefs.GetInt(save_Checkpoint_Index, -1);
 
-        //fade the player sprite to transparent
-        while (timeElapsed < fadeDuration)
+        if(savedCheckpointIndex != -1)
         {
-            timeElapsed += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, timeElapsed / fadeDuration);
-            spriteRenderer.color = new Color(initialColor.r, initialColor.g, initialColor.b, alpha);
+            startingPoint = checkpointsArray[savedCheckpointIndex].transform.position;
+            RespawnPLayer();
+        }
+        else
+        {
+            startingPoint = gameObject.transform.position;
+        }
+    }
 
-            yield return null;
+    private void Update()
+    {
+        if(transform.position.y <= -10)
+        {
+            RespawnPLayer();
+        }
+    }
+
+    private void RespawnPLayer()
+    {
+        gameObject.transform.position = startingPoint;
+        rb.angularVelocity = Vector3.zero;
+    }
+
+    private void LoadCheckpoints()
+    {
+        checkpointsArray = new GameObject[checkpointsParent.transform.childCount];
+
+        int index = 0;
+
+        foreach(Transform singleCheckpoint in checkpointsParent.transform)
+        {
+            checkpointsArray[index] = singleCheckpoint.gameObject;
+            index++;
         }
 
-        spriteRenderer.color = new Color(initialColor.r, initialColor.g, initialColor.b, 0f);
-        Respawn();
     }
 
-    private void Respawn()
-    {
-        Color initialColor = spriteRenderer.color;
-        spriteRenderer.color = new Color(initialColor.r, initialColor.g, initialColor.b, 1f);
-        player.transform.position = respawnPoint.position;
-        isDead = false;
-        respawnCoins = true;
-    }
 
-    public void Die()
+    private void OnTriggerEnter(Collider other)
     {
-        // Check for player's death
-        if (isDead)
+        if (other.gameObject.CompareTag("CheckPoint"))
         {
-            return; // Do nothing if already fading out
+            int checkPointIndex = -1;
+            checkPointIndex = Array.FindIndex(checkpointsArray, match => match == other.gameObject);
+
+            if(checkPointIndex != -1)
+            {
+                PlayerPrefs.SetInt(save_Checkpoint_Index, checkPointIndex);
+                startingPoint = other.gameObject.transform.position;
+                other.gameObject.SetActive(false);
+            }
         }
-        isDead = true;
-        StartCoroutine(FadeOut());
     }
 }
