@@ -214,7 +214,7 @@ Rigidbody:
   m_GameObject: {fileID: 245795634581913251}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 4
+  m_Drag: 2
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -246,8 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   tagLight: {fileID: 6126389128040342045}
-  tagged:
-    m_InternalValue: 0
+  taggedPlayer: 0
 --- !u!114 &7567136732071505080
 MonoBehaviour:
   m_ObjectHideFlags: 0

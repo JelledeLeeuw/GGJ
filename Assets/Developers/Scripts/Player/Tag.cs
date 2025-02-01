@@ -1,40 +1,40 @@
-using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Tag : NetworkBehaviour
 {
-    [SerializeField]
-    private GameObject tagLight;
-
-    public ulong taggedPlayer;
+    [SerializeField] private GameObject tagLight;
+    public NetworkVariable<bool> tagged = new NetworkVariable<bool>(
+        false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     private float tagCooldown = 1.5f; // Cooldown time in seconds
-    private float lastTagTime = 0f; // Tracks last tag time
-
-    private TagManager tagManager;
+    private float lastTagTime = 0f;   // Tracks last tag time
 
     private void Start()
     {
-        taggedPlayer = 99999;
-        tagManager = FindFirstObjectByType<TagManager>();
-        if (!IsOwner)
-        {
-            enabled = false;
-            return;
-        }
+        tagged.OnValueChanged += OnTagChanged;  
+    }
+
+    private void OnDestroy()
+    {
+        tagged.OnValueChanged -= OnTagChanged;  
+    }
+
+    private void OnTagChanged(bool oldValue, bool newValue)
+    {
+        tagLight.SetActive(newValue);  
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (taggedPlayer == OwnerClientId && other.gameObject.CompareTag("Player"))
+        if (!IsServer) return;  
+
+        if (tagged.Value && other.gameObject.CompareTag("Player"))
         {
-            if (Time.time - lastTagTime < tagCooldown)
-                return; // Prevent instant swaps
+            if (Time.time - lastTagTime < tagCooldown) return; // Prevent instant swaps
 
             Debug.Log($"Tagging {other.gameObject.name}");
-            lastTagTime = Time.time; // Update last tag time
+            lastTagTime = Time.time;  // Update last tag time
             TransferTag(other.gameObject);
         }
     }
@@ -42,30 +42,23 @@ public class Tag : NetworkBehaviour
     private void TransferTag(GameObject newTagger)
     {
         Tag newTagScript = newTagger.GetComponent<Tag>();
-        if (newTagScript == null)
-            return;
-        newTagScript.RecieveTag();
+        if (newTagScript == null) return;
+
+        tagged.Value = false;
+        newTagScript.SetTaggedServerRpc();
     }
 
-    public void RecieveTag()
+    [ServerRpc(RequireOwnership = false)]
+    public void SetTaggedServerRpc()
     {
-        if (tagManager == null)
-        {
-            Debug.LogWarning("TagManager not found.");
-            tagManager = FindFirstObjectByType<TagManager>();
-        }
-        tagManager.SetTaggedPlayerRpc(OwnerClientId);
-        SetLightRpc();
-    }
-
-    public void SetLightRpc()
-    {
-        tagLight.SetActive(taggedPlayer == OwnerClientId);
+        tagged.Value = true;
+        Debug.Log($"{gameObject.name} is now tagged!");
+        lastTagTime = Time.time;  // Ensure cooldown applies to the new tagger
     }
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        // tagLight.SetActive(tagged.Value);
+        tagLight.SetActive(tagged.Value);  
     }
 }
