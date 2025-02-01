@@ -8533,6 +8533,7 @@ MonoBehaviour:
   gameState: 0
   connectPrefab: {fileID: 1202401540}
   startButton: {fileID: 519582905}
+  maxPlayers: 4
 --- !u!4 &800240062
 Transform:
   m_ObjectHideFlags: 0
