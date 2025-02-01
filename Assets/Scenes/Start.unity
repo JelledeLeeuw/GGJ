@@ -1303,7 +1303,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2100624312}
         m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
-        m_MethodName: Map3
+        m_MethodName: Map2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
