@@ -4957,7 +4957,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2900579933075659005, guid: 1d2836bbfc0350242aba304f2a816c00, type: 3}
   m_PrefabInstance: {fileID: 482157780}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
 --- !u!1001 &514483855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5106,7 +5105,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 69dc480b33879fa4188ea66c10612410, type: 3}
   m_PrefabInstance: {fileID: 525980074}
   m_PrefabAsset: {fileID: 0}
-=======
 --- !u!1 &519582904
 GameObject:
   m_ObjectHideFlags: 0
@@ -5228,7 +5226,6 @@ RectTransform:
   m_AnchoredPosition: {x: -135, y: 0}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
->>>>>>> Stashed changes
 --- !u!1 &527061210
 GameObject:
   m_ObjectHideFlags: 0
@@ -8150,7 +8147,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
-<<<<<<< Updated upstream
 --- !u!1001 &823398664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8225,7 +8221,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 99c4ce8275e902e4eb4f904d2bfa531d, type: 3}
   m_PrefabInstance: {fileID: 823398664}
   m_PrefabAsset: {fileID: 0}
-=======
 --- !u!1 &800240059
 GameObject:
   m_ObjectHideFlags: 0
@@ -8300,7 +8295,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> Stashed changes
 --- !u!1 &827256112
 GameObject:
   m_ObjectHideFlags: 0
@@ -21264,8 +21258,5 @@ SceneRoots:
   - {fileID: 252587311}
   - {fileID: 1415686532}
   - {fileID: 1086104131}
-<<<<<<< Updated upstream
   - {fileID: 880459542}
-=======
   - {fileID: 800240062}
->>>>>>> Stashed changes
