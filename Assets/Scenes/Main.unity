@@ -8561,6 +8561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  Players: []
 --- !u!1001 &823398664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8960,7 +8961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5368057776791303980, guid: d283bda9bbfe32e448b88e0df9c40d27, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.304246e-15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5368057776791303980, guid: d283bda9bbfe32e448b88e0df9c40d27, type: 3}
       propertyPath: m_LocalPosition.z

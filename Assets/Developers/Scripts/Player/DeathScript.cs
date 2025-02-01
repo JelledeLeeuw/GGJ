@@ -15,6 +15,9 @@ public class DeathScript : MonoBehaviour
 
     private const string save_Checkpoint_Index = "Last_Checkpoint_Index";
 
+    private Tag tagScript;
+    private TagManager tagManager;
+
     private void Awake()
     {
         LoadCheckpoints();
@@ -40,7 +43,7 @@ public class DeathScript : MonoBehaviour
 
     private void Update()
     {
-        if(transform.position.y <= -10)
+        if(transform.position.y <= -1)
         {
             RespawnPLayer();
         }
@@ -50,6 +53,11 @@ public class DeathScript : MonoBehaviour
     {
         gameObject.transform.position = startingPoint;
         rb.angularVelocity = Vector3.zero;
+        for (int i = 0; i < tagManager.Players.Count; i++)
+        {
+            tagManager.Players[i].GetComponent<Tag>().tagged.Value = false;
+        }
+        tagScript.tagged.Value = true;
     }
 
     private void LoadCheckpoints()
