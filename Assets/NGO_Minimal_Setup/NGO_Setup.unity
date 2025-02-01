@@ -1665,7 +1665,6 @@ GameObject:
   - component: {fileID: 616896367}
   - component: {fileID: 616896364}
   - component: {fileID: 616896366}
-  - component: {fileID: 616896369}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1891,19 +1890,6 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   FollowOffset: {x: 0, y: 3, z: -10}
---- !u!114 &616896369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616896360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d21e21b258eb67458448fab04b5eec4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 616896365}
 --- !u!1 &633526105
 GameObject:
   m_ObjectHideFlags: 0

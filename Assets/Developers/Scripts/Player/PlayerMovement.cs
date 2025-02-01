@@ -35,11 +35,13 @@ public class PlayerMovement : NetworkBehaviour
             enabled = false;
             return;
         }
+        
+        //Cursor.lockState = CursorLockMode.Locked;
         inputHandler = FindFirstObjectByType<InputHandler>();
         mainCamera = Camera.main;
         mainCamera.GetComponent<SetCameraTarget>().AssignTarget(transform);
 
-        rb = GetComponent<Rigidbody>();
+        rb = gameObject.GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
@@ -82,8 +84,7 @@ public class PlayerMovement : NetworkBehaviour
                 clampedVelocity.z
             );
         }
-
-        //currentMovement += Physics.gravity;
+        
 
         HandleRotation(worldDirection, cameraForward);
     }
@@ -92,9 +93,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (worldDirection.magnitude > 0.01f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation( /*inputHandler.aimTriggered ? cameraForward :*/
-                worldDirection
-            );
+            Quaternion targetRotation = Quaternion.LookRotation(worldDirection);
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 targetRotation,
