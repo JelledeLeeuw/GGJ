@@ -18,8 +18,7 @@ public class BigHammer : MonoBehaviour
         {
             _target = 220;
         }
-        Debug.Log(_rotation);
         float _angle = Mathf.SmoothDampAngle(transform.eulerAngles.z, _target,ref r, 0.5f);
-        transform.rotation = Quaternion.Euler(0,-90,_angle);
+        transform.rotation = Quaternion.Euler(0,0,_angle);
     }
 }
