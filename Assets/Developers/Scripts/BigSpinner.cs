@@ -11,7 +11,7 @@ public class BigSpinner : MonoBehaviour
         _rotation += rotationSpeed * Time.fixedDeltaTime;
         transform.rotation = Quaternion.Euler(0, _rotation, 0);
     }
-
+    
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Player"))
