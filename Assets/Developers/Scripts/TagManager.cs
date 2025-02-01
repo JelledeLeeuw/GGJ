@@ -27,5 +27,7 @@ public class TagManager : NetworkBehaviour
             p.GetComponent<Tag>().taggedPlayer = player;
             p.GetComponent<Tag>().SetLightRpc();
         }
+        
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

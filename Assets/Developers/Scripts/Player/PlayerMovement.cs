@@ -1,3 +1,4 @@
+using System.Collections;
 using Developers.Scripts;
 using Unity.Netcode;
 using Unity.Netcode.Components;
@@ -29,6 +30,10 @@ public class PlayerMovement : NetworkBehaviour
 
     private Camera mainCamera; // caches the main camera
 
+    private bool _isJumping;
+
+    private bool _isGrounded;
+
     private void Start()
     {
         // characterController = gameObject.GetComponent<CharacterController>();
@@ -58,6 +63,7 @@ public class PlayerMovement : NetworkBehaviour
         if (!IsOwner || GameManager.Instance.gameState != GameState.Playing)
             return;
         HandleMovement();
+        Jump();
     }
 
     private void HandleMovement()
@@ -84,7 +90,7 @@ public class PlayerMovement : NetworkBehaviour
 
         rb.Rigidbody.AddForce(currentMovement * Time.deltaTime, ForceMode.Impulse);
         Vector3 horizontalVelocity = new Vector3(rb.Rigidbody.linearVelocity.x, 0, rb.Rigidbody.linearVelocity.z);
-        if (horizontalVelocity.magnitude > maxVelocity)
+        if (horizontalVelocity.magnitude > maxVelocity && _isJumping == false)
         {
             Vector3 clampedVelocity = horizontalVelocity.normalized * maxVelocity;
             rb.Rigidbody.linearVelocity = new Vector3(
@@ -95,6 +101,31 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         HandleRotation(worldDirection, cameraForward);
+    }
+
+    private void Jump()
+    {
+        if(inputHandler.jumpTriggered == true && _isJumping == false && _isGrounded == true)
+        {
+            Debug.Log("yess");
+            StartCoroutine(Jumping());
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            _isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            _isGrounded = false;
+        }
     }
 
     private void HandleRotation(Vector3 worldDirection, Vector3 cameraForward)
@@ -108,5 +139,13 @@ public class PlayerMovement : NetworkBehaviour
                 rotationSpeed * Time.deltaTime
             );
         }
+    }
+
+    private IEnumerator Jumping()
+    {
+        _isJumping = true;
+        rb.Rigidbody.AddForce(0,20,0,ForceMode.Impulse);
+        yield return new WaitForSeconds(0.5f);
+        _isJumping = false;
     }
 }
