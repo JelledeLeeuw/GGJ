@@ -29,10 +29,10 @@ public class PunchWallMover : MonoBehaviour
             GameObject randomObject = GetRandomObject();
 
             // Beweeg het object naar -5
-            yield return StartCoroutine(MoveObjectToPosition(randomObject, new Vector3(randomObject.transform.position.x - 5f, randomObject.transform.position.y, randomObject.transform.position.z)));
+            yield return StartCoroutine(MoveObjectToPosition(randomObject, Vector3.left * 5f));
 
             // Beweeg het object weer naar 0
-            yield return StartCoroutine(MoveObjectToPosition(randomObject, new Vector3(randomObject.transform.position.x + 5f, randomObject.transform.position.y, randomObject.transform.position.z)));
+            yield return StartCoroutine(MoveObjectToPosition(randomObject, Vector3.right * 5f));
 
             // Nadat het object is bewogen, slaan we dit object op als het laatst bewogen object
             lastMovedObject = randomObject;
@@ -43,13 +43,13 @@ public class PunchWallMover : MonoBehaviour
     }
 
     // Numerator om de objects naar de -5 op de x as te brengen
-    private IEnumerator MoveObjectToPosition(GameObject obj, Vector3 targetX)
+    private IEnumerator MoveObjectToPosition(GameObject obj, Vector3 localOffset)
     {
-        while (Mathf.Abs(obj.transform.position.x - targetX.x) > 0.1f)
+        Vector3 targetPosition = obj.transform.position + obj.transform.TransformDirection(localOffset);
+
+        while (Vector3.Distance(obj.transform.position, targetPosition) > 0.1f)
         {
-            obj.transform.position = Vector3.MoveTowards(obj.transform.position,
-                                                        targetX,
-                                                         moveSpeed * Time.deltaTime);
+            obj.transform.position = Vector3.MoveTowards(obj.transform.position, targetPosition, moveSpeed * Time.deltaTime);
             yield return null;
         }
     }
