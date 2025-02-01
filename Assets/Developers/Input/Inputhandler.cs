@@ -7,7 +7,7 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private Controls playerControls;
 
     private InputAction moveAction;
-    //private InputAction jumpAction;
+    private InputAction jumpAction;
     private InputAction sprintAction;
     private InputAction shootAction;
     public Vector2 moveInput { get; private set; }
@@ -15,6 +15,7 @@ public class InputHandler : MonoBehaviour
     public bool jumpTriggered { get; private set; }
 
     public bool shootTriggered { get; private set; }
+
 
     public static InputHandler Instance { get; private set; }
 
@@ -33,6 +34,7 @@ public class InputHandler : MonoBehaviour
         playerControls.Enable();
         moveAction = playerControls.Player.Move;
         shootAction = playerControls.Player.Shoot;
+        jumpAction = playerControls.Player.Jump;
         RegisterInputActions();
     }
 
@@ -42,6 +44,8 @@ public class InputHandler : MonoBehaviour
         moveAction.canceled += context => moveInput = Vector2.zero;
         shootAction.performed += context => shootTriggered = true;
         shootAction.canceled += context => shootTriggered = false;
+        jumpAction.performed += context => jumpTriggered = true;
+        jumpAction.canceled += context => jumpTriggered = false;
     }
 
     private void OnEnable()
