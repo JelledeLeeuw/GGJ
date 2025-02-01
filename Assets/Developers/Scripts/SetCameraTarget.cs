@@ -20,7 +20,6 @@ public class SetCameraTarget : MonoBehaviour
 
     public void AssignTarget(Transform player)
     {
-        cam.Target.LookAtTarget = player;
         cam.Target.TrackingTarget = player;
     }
 }
