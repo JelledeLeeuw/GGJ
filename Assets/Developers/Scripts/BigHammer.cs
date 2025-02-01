@@ -27,7 +27,7 @@ public class BigHammer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 50, ForceMode.Impulse);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 100, ForceMode.Impulse);
         }
     }
 }
