@@ -1,5 +1,6 @@
 using Developers.Scripts;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private CharacterController characterController;
 
-    private Rigidbody rb;
+    private NetworkRigidbody rb;
 
     private Camera mainCamera; // caches the main camera
 
@@ -42,7 +43,7 @@ public class PlayerMovement : NetworkBehaviour
         mainCamera = Camera.main;
         mainCamera.GetComponent<SetCameraTarget>().AssignTarget(transform);
 
-        rb = gameObject.GetComponent<Rigidbody>();
+        rb = gameObject.GetComponent<NetworkRigidbody>();
         GameManager.Instance.AddPlayer(this);
     }
 
@@ -81,14 +82,14 @@ public class PlayerMovement : NetworkBehaviour
         currentMovement.x = worldDirection.x * walkSpeed;
         currentMovement.z = worldDirection.z * walkSpeed;
 
-        rb.AddForce(currentMovement * Time.deltaTime, ForceMode.Impulse);
-        Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        rb.Rigidbody.AddForce(currentMovement * Time.deltaTime, ForceMode.Impulse);
+        Vector3 horizontalVelocity = new Vector3(rb.Rigidbody.linearVelocity.x, 0, rb.Rigidbody.linearVelocity.z);
         if (horizontalVelocity.magnitude > maxVelocity)
         {
             Vector3 clampedVelocity = horizontalVelocity.normalized * maxVelocity;
-            rb.linearVelocity = new Vector3(
+            rb.Rigidbody.linearVelocity = new Vector3(
                 clampedVelocity.x,
-                rb.linearVelocity.y,
+                rb.Rigidbody.linearVelocity.y,
                 clampedVelocity.z
             );
         }
