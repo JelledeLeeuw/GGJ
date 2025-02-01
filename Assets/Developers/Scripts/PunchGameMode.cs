@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PunchGameMode : MonoBehaviour
 {
+    [SerializeField]
+    private float force = 10f;
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -15,7 +18,7 @@ public class PunchGameMode : MonoBehaviour
                 ).normalized;
 
                 // Apply force in that direction
-                rb.AddForce(knockbackDirection * 10f, ForceMode.Impulse);
+                rb.AddForce(knockbackDirection * force, ForceMode.Impulse);
             }
         }
     }
