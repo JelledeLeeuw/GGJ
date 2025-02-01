@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TagManager : NetworkBehaviour
 {
-    public List<GameObject> Players = new List<GameObject>();
+    private List<GameObject> Players = new List<GameObject>();
 
     private void Update()
     {
