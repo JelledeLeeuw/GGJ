@@ -12703,6 +12703,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1458264630}
     m_Modifications:
+    - target: {fileID: 1174631318842466957, guid: 0fd0981981b0ffa4b85ba6a3be1f3772, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 1248597934329860994, guid: 0fd0981981b0ffa4b85ba6a3be1f3772, type: 3}
       propertyPath: m_Name
       value: Map1
@@ -12762,6 +12766,30 @@ PrefabInstance:
     - target: {fileID: 1880316170191817016, guid: 0fd0981981b0ffa4b85ba6a3be1f3772, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2838992794345681890, guid: 0fd0981981b0ffa4b85ba6a3be1f3772, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4896879216728705002, guid: 0fd0981981b0ffa4b85ba6a3be1f3772, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022439891831803688, guid: 0fd0981981b0ffa4b85ba6a3be1f3772, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712720447842188971, guid: 0fd0981981b0ffa4b85ba6a3be1f3772, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 7028701545815694180, guid: 0fd0981981b0ffa4b85ba6a3be1f3772, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135830952363333452, guid: 0fd0981981b0ffa4b85ba6a3be1f3772, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 8192221881829137658, guid: 0fd0981981b0ffa4b85ba6a3be1f3772, type: 3}
       propertyPath: m_LocalPosition.x
