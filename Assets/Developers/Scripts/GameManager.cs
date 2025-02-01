@@ -32,6 +32,7 @@ namespace Developers.Scripts
 
         private void Start()
         {
+            NetworkManager.Singleton.ConnectionApprovalCallback = ApprovalCheck;
             startButton.onClick.AddListener(StartGame);
             startButton.interactable = false;
         }
@@ -75,6 +76,26 @@ namespace Developers.Scripts
         private void GameStartedRpc()
         {
             gameState = GameState.Playing;
+        }
+
+        public int maxPlayers = 4; // Change this to your desired max player count
+
+        private void ApprovalCheck(
+            NetworkManager.ConnectionApprovalRequest request,
+            NetworkManager.ConnectionApprovalResponse response
+        )
+        {
+            if (NetworkManager.Singleton.ConnectedClients.Count >= 10)
+            {
+                Debug.Log("Max player limit reached. Rejecting connection.");
+                response.Approved = false; // Reject connection if max players reached
+            }
+            else
+            {
+                response.Approved = true;
+            }
+
+            response.Pending = false;
         }
     }
 
