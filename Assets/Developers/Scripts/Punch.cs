@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Punch : MonoBehaviour
@@ -7,9 +8,7 @@ public class Punch : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other
-                .gameObject.GetComponent<Rigidbody>()
-                .AddForce(other.transform.forward * -100, ForceMode.Impulse);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 100, ForceMode.Impulse);
         }
     }
 }
