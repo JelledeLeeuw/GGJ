@@ -823,7 +823,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1404417186}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2100624312}
+        m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
+        m_MethodName: Map2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1404417186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1019,7 +1031,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1474426526}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2100624312}
+        m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
+        m_MethodName: Map1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1474426526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1276,7 +1300,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1587465856}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2100624312}
+        m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
+        m_MethodName: Map3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1587465856
 MonoBehaviour:
   m_ObjectHideFlags: 0
