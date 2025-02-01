@@ -1809,32 +1809,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51ace6a9439bed846861a1bad0bf559d, type: 3}
---- !u!1 &183762100 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2897841099680780810, guid: d283bda9bbfe32e448b88e0df9c40d27, type: 3}
-  m_PrefabInstance: {fileID: 880459542}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &183762104
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 183762100}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 9.999999, y: 2.2204459e-16, z: 9.999999}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &188249350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7023552700577566063, guid: f078d05dfeca030498bfff2043026313, type: 3}
@@ -8587,6 +8561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  Players: []
 --- !u!1001 &823398664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9024,10 +8999,7 @@ PrefabInstance:
     - {fileID: 7671725198610293407, guid: d283bda9bbfe32e448b88e0df9c40d27, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2897841099680780810, guid: d283bda9bbfe32e448b88e0df9c40d27, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 183762104}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d283bda9bbfe32e448b88e0df9c40d27, type: 3}
 --- !u!1 &880693942
 GameObject:
