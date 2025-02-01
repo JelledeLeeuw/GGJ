@@ -29,10 +29,10 @@ public class PunchWallMover : MonoBehaviour
             GameObject randomObject = GetRandomObject();
 
             // Beweeg het object naar -5
-            yield return StartCoroutine(MoveObjectToPosition(randomObject, -5f));
+            yield return StartCoroutine(MoveObjectToPosition(randomObject, new Vector3(randomObject.transform.position.x - 5f, randomObject.transform.position.y, randomObject.transform.position.z)));
 
             // Beweeg het object weer naar 0
-            yield return StartCoroutine(MoveObjectToPosition(randomObject, 0f));
+            yield return StartCoroutine(MoveObjectToPosition(randomObject, new Vector3(randomObject.transform.position.x + 5f, randomObject.transform.position.y, randomObject.transform.position.z)));
 
             // Nadat het object is bewogen, slaan we dit object op als het laatst bewogen object
             lastMovedObject = randomObject;
@@ -43,12 +43,12 @@ public class PunchWallMover : MonoBehaviour
     }
 
     // Numerator om de objects naar de -5 op de x as te brengen
-    private IEnumerator MoveObjectToPosition(GameObject obj, float targetX)
+    private IEnumerator MoveObjectToPosition(GameObject obj, Vector3 targetX)
     {
-        while (Mathf.Abs(obj.transform.position.x - targetX) > 0.1f)
+        while (Mathf.Abs(obj.transform.position.x - targetX.x) > 0.1f)
         {
             obj.transform.position = Vector3.MoveTowards(obj.transform.position,
-                                                         new Vector3(targetX, obj.transform.position.y, obj.transform.position.z),
+                                                        targetX,
                                                          moveSpeed * Time.deltaTime);
             yield return null;
         }
