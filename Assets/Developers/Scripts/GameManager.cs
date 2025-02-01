@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Developers.Scripts
@@ -44,7 +45,11 @@ namespace Developers.Scripts
                 Debug.LogWarning("Only the session owner can start the game.");
                 return;
             }
-            GetComponent<TagManager>().StartGame();
+
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                GetComponent<TagManager>().StartGame();
+            }
             StartGameRpc();
         }
 
