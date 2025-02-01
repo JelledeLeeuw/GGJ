@@ -7,6 +7,7 @@ public class PunchGameMode : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        bool critHit = Random.Range(0f, 1f) > 0.5f;
         if (collision.gameObject.CompareTag("Player"))
         {
             Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
@@ -18,7 +19,7 @@ public class PunchGameMode : MonoBehaviour
                 ).normalized;
 
                 // Apply force in that direction
-                rb.AddForce(knockbackDirection * force, ForceMode.Impulse);
+                rb.AddForce(knockbackDirection * (critHit ? force * 4 : force), ForceMode.Impulse);
             }
         }
     }
