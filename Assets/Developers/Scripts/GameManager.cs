@@ -43,6 +43,7 @@ namespace Developers.Scripts
                 Debug.LogWarning("Only the session owner can start the game.");
                 return;
             }
+            GetComponent<TagManager>().StartGame();
             StartGameRpc();
         }
 

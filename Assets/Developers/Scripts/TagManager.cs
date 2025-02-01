@@ -16,6 +16,16 @@ public class TagManager : NetworkBehaviour
     {
         int rng = UnityEngine.Random.Range(0, Players.Count + 1);
 
-        Players[rng].GetComponent<Tag>().tagged.Value = true;
+        Players[rng].GetComponent<Tag>().RecieveTag();
+    }
+
+    [Rpc(SendTo.Everyone, Delivery = RpcDelivery.Reliable)]
+    public void SetTaggedPlayerRpc(ulong player)
+    {
+        foreach (GameObject p in Players)
+        {
+            p.GetComponent<Tag>().taggedPlayer = player;
+            p.GetComponent<Tag>().SetLightRpc();
+        }
     }
 }
