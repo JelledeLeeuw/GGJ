@@ -17,5 +17,7 @@ public class TagManager : NetworkBehaviour
         int rng = UnityEngine.Random.Range(0, Players.Count + 1);
 
         Players[rng].GetComponent<Tag>().tagged.Value = true;
+        
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
