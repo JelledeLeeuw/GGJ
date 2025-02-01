@@ -1,3 +1,4 @@
+using Developers.Scripts;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -35,18 +36,25 @@ public class PlayerMovement : NetworkBehaviour
             enabled = false;
             return;
         }
-        
+
         //Cursor.lockState = CursorLockMode.Locked;
         inputHandler = FindFirstObjectByType<InputHandler>();
         mainCamera = Camera.main;
         mainCamera.GetComponent<SetCameraTarget>().AssignTarget(transform);
 
         rb = gameObject.GetComponent<Rigidbody>();
+        GameManager.Instance.AddPlayer(this);
+    }
+
+    [Rpc(SendTo.Authority)]
+    public void GameStartRpc()
+    {
+        GameManager.Instance.PlayerReady();
     }
 
     private void FixedUpdate()
     {
-        if (!IsOwner)
+        if (!IsOwner || GameManager.Instance.gameState != GameState.Playing)
             return;
         HandleMovement();
     }
@@ -84,7 +92,6 @@ public class PlayerMovement : NetworkBehaviour
                 clampedVelocity.z
             );
         }
-        
 
         HandleRotation(worldDirection, cameraForward);
     }
